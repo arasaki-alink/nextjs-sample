@@ -6,7 +6,6 @@ import Script from "next/script";
 
 import { useEffect, useState } from "react";
 
-
 export default function Page({ params }: { params: { id: string } }) {
   const currentId = params.id;
 
@@ -15,17 +14,12 @@ export default function Page({ params }: { params: { id: string } }) {
   const [text, setText] = useState('はじめまして');
 
   useEffect(() => {
-    // if (!hasVisited) {
-    //   localStorage.setItem("hasVisited", "true");
-    // }
     if (!hasVisited) {
       localStorage.setItem("hasVisited", "true");
     } else {
-      setText('また会えて嬉しいです')
+      setText('また会えて嬉しいです');
     }
-  }, []);
-
-  // const text = hasVisited ? 'また会えて嬉しいです' : 'はじめまして';
+  }, [hasVisited]); // hasVisitedを依存関係に追加
 
   return (
     <section>
@@ -35,12 +29,13 @@ export default function Page({ params }: { params: { id: string } }) {
           __html: `window.isSXG=false`,
         }}
         data-issxg-var=""
+        id="issxg"
       ></Script>
 
       <h1>My Post: {currentId}</h1>
 
       <div className="js-container">
-      <p id="guest">{text}、 hogeさん</p>
+        <p id="guest">{text}、 hogeさん</p>
       </div>
 
       <p>
