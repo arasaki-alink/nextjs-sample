@@ -6,6 +6,15 @@ import Script from "next/script";
 
 import { useEffect, useState } from "react";
 
+async function getAllArticleIds () {
+  return ['123', '456'];
+}
+
+export async function genearteStaticParams() {
+  const ids = await getAllArticleIds();
+  return ids.map(id => ({ id }));
+}
+
 export default function Page({ params }: { params: { id: string } }) {
   const currentId = params.id;
 
